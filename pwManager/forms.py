@@ -36,7 +36,7 @@ class CredentialForm(ModelForm):
 
 		super(CredentialForm, self).__init__(*args, **kwargs)
 
-		placeholder = iter(['Service Here','Username Here','Email Here','Password Here'])
+		placeholder = iter(['Gmail,Facebook,Instagram,etc','Username Here','Email Here','Password Here'])
 
 		for name, field in self.fields.items():
 			

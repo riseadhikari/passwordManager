@@ -4,7 +4,8 @@ from decouple import config
 from .models import User,Credential
 from django.contrib import messages
 import json
-# Create your views here.
+
+
 def register(request):
 	try:
 		with open('log.json','r') as env:
@@ -71,7 +72,7 @@ def index(request):
 		return redirect('login')
 
 	
-# def bio_auth(request):
+# def bio_auth(request): -> To be completed.
 	
 
 def logout(request):

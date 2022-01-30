@@ -9,6 +9,9 @@ class User(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	id = models.UUIDField(default=uuid.uuid4,primary_key=True,unique=True,editable=False)
 
+	def __str__(self):
+		return self.username
+
 class Credential(models.Model):
 	user = models.ForeignKey('User',on_delete=models.CASCADE,null=True)
 	service = models.CharField(max_length=300,null=True,blank=False)
@@ -18,5 +21,6 @@ class Credential(models.Model):
 	created = models.DateTimeField(auto_now_add=True)
 	id = models.UUIDField(default=uuid.uuid4,primary_key=True,unique=True,editable=False)
 
-
+	def __str__(self):
+		return self.service
 
