@@ -1,0 +1,48 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+<meta id="refresh">
+<script>
+function Display() {
+	var djangoData = document.getElementById("my-data").getAttribute("data-name")
+
+document.getElementById("password").innerHTML = djangoData;
+document.getElementById("refresh").setAttribute("http-equiv", "refresh");
+document.getElementById("refresh").setAttribute("content", "10");
+}
+</script>
+
+	<h1 class="text-center">Welcome {{user}}!!!</h1>
+
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">Service</th>
+			      <th scope="col">Username</th>
+			      <th scope="col">Email</th>
+			      <th scope="col">Password</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for cred in credential %}
+			  	<meta id="my-data" data-name="{{cred.password}}">
+			    <tr>
+			      <td>{{cred.service}}</td>
+			      <td>{{cred.username}}</td>
+			      <td>{{cred.email}}</td>
+			      <td id="password">*********</td>
+			      <td><button onclick="Display()" class="btn btn-primary">Show</button></td>
+			       <td><a class="btn btn-primary" href="{% url 'edit-cred' cred.id %}">Edit</a></td>
+			      <td><a class="btn btn-danger" href="{% url 'delete-cred' cred.id %}">Delete</a></td>
+		
+			    </tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+
+	<a href="{% url 'data-input'  %}" class="btn btn-dark">Enter your Data</a>
+	<a href="{% url 'logout' %} " class="btn btn-dark">Logout</a>
+
+
+{% endblock %}

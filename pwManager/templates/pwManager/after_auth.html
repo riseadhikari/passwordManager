@@ -1,0 +1,34 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+
+	<h1 class="text-center">Welcome {{user}}!!!</h1>
+
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">Service</th>
+			      <th scope="col">Username</th>
+			      <th scope="col">Email</th>
+			      <th scope="col">Password</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	{% for cred in credential %}
+			    <tr>
+			      <td>{{cred.service}}</td>
+			      <td>{{cred.username}}</td>
+			      <td>{{cred.email}}</td>
+			      <td>{{cred.password}}</td>
+		
+			    </tr>
+			    {% endfor %}
+			  </tbody>
+			</table>
+
+	<a href="{% url 'data-input'  %}" class="btn btn-dark">Enter your Data</a>
+	<a href="{% url 'logout' %} " class="btn btn-dark">Logout</a>
+
+
+{% endblock %}
