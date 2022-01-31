@@ -2,7 +2,9 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from decouple import config
 
+x = sys.argv
 
 def main():
     """Run administrative tasks."""
@@ -19,4 +21,8 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    password = config('DB_PASSWORD',default=' ')
+    if password == ' ' and 'runserver' in x:
+        print('Login to Database First')
+    else:
+        main()
