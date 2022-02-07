@@ -9,7 +9,7 @@ function Display() {
 
 document.getElementById("password").innerHTML = djangoData;
 document.getElementById("refresh").setAttribute("http-equiv", "refresh");
-document.getElementById("refresh").setAttribute("content", "10");
+// document.getElementById("refresh").setAttribute("content", "10");
 }
 </script>
 
@@ -31,7 +31,7 @@ document.getElementById("refresh").setAttribute("content", "10");
 			      <td>{{cred.service}}</td>
 			      <td>{{cred.username}}</td>
 			      <td>{{cred.email}}</td>
-			      <td id="password">*********</td>
+			      <td id="password">{{cred.password}}</td>
 			      <td><button onclick="Display()" class="btn btn-primary">Show</button></td>
 			       <td><a class="btn btn-primary" href="{% url 'edit-cred' cred.id %}">Edit</a></td>
 			      <td><a class="btn btn-danger" href="{% url 'delete-cred' cred.id %}">Delete</a></td>

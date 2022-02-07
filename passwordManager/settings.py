@@ -14,16 +14,19 @@ from pathlib import Path
 from decouple import config
 import os
 import base64
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+with open('config.json','r') as config:
+    data = json.load(config)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = data['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -84,14 +87,16 @@ WSGI_APPLICATION = 'passwordManager.wsgi.application'
 #     }
 # }
 
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
+        'NAME': data['DB_NAME'],
+        'USER': data['DB_USER'],
         'POST':'5432',
-        'PASSWORD':str(base64.b64decode(config('DB_PASSWORD')),'utf-8'),
-        'HOST':'localhost',
+        'PASSWORD':base64.b64decode(data['password'].encode()).decode(),
+        'HOST':'127.0.0.1',
     }
 }
 
