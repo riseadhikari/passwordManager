@@ -5,11 +5,24 @@
 <meta id="refresh">
 <script>
 function Display() {
-	var djangoData = document.getElementById("my-data").getAttribute("data-name")
+	// var djangoData = document.getElementById("my-data").getAttribute("data-name")
 
-document.getElementById("password").innerHTML = djangoData;
+// document.getElementById("password").innerHTML = djangoData;
+document.getElementById("afterShow").innerHTML=	`{% for cred in credential %}
+			  	<meta id="my-data" data-name="{{cred.password}}">
+			    <tr>
+			      <td>{{cred.service}}</td>
+			      <td>{{cred.username}}</td>
+			      <td>{{cred.email}}</td>
+			      <td id="password">{{cred.password}}</td>
+			      
+			       <td><a class="btn btn-primary" href="{% url 'edit-cred' cred.id %}">Edit</a></td>
+			      <td><a class="btn btn-danger" href="{% url 'delete-cred' cred.id %}">Delete</a></td>
+		
+			    </tr>
+			    {% endfor %}`
 document.getElementById("refresh").setAttribute("http-equiv", "refresh");
-// document.getElementById("refresh").setAttribute("content", "10");
+document.getElementById("refresh").setAttribute("content", "15");
 }
 </script>
 
@@ -24,15 +37,15 @@ document.getElementById("refresh").setAttribute("http-equiv", "refresh");
 			      <th scope="col">Password</th>
 			    </tr>
 			  </thead>
-			  <tbody>
+			  <tbody id='afterShow'>
 			  	{% for cred in credential %}
 			  	<meta id="my-data" data-name="{{cred.password}}">
 			    <tr>
 			      <td>{{cred.service}}</td>
 			      <td>{{cred.username}}</td>
 			      <td>{{cred.email}}</td>
-			      <td id="password">{{cred.password}}</td>
-			      <td><button onclick="Display()" class="btn btn-primary">Show</button></td>
+			      <td id="password">********</td>
+			      
 			       <td><a class="btn btn-primary" href="{% url 'edit-cred' cred.id %}">Edit</a></td>
 			      <td><a class="btn btn-danger" href="{% url 'delete-cred' cred.id %}">Delete</a></td>
 		
@@ -41,6 +54,7 @@ document.getElementById("refresh").setAttribute("http-equiv", "refresh");
 			  </tbody>
 			</table>
 
+	<button onclick="Display()" class="btn btn-primary">Show</button>
 	<a href="{% url 'data-input'  %}" class="btn btn-dark">Enter your Data</a>
 	<a href="{% url 'logout' %} " class="btn btn-dark">Logout</a>
 

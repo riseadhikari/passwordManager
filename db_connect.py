@@ -15,7 +15,6 @@ while inside:
 				env.write(env_new.read())
 		pass_word = base64.b64encode(password.encode())
 		pass_word = pass_word.decode()
-		print(pass_word)
 		with open('config.json','r') as env1:
 			data = json.load(env1)
 			# print(data)
@@ -24,7 +23,6 @@ while inside:
 			data["password"] = f"{pass_word}"
 		with open('config.json','w') as env2:
 			json.dump(data,env2)
-			# env.write(f'\nDB_PASSWORD={pass_word}')
 		conn.close()
 		inside = False
 	except Exception as e:

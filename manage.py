@@ -2,7 +2,8 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-from decouple import config
+from django.conf import settings
+import json 
 
 x = sys.argv
 
@@ -21,8 +22,7 @@ def main():
 
 
 if __name__ == '__main__':
-    password = config('DB_PASSWORD',default=' ')
-    if password == ' ' and 'runserver' in x:
+    if (os.stat('config.json').st_size == 0) and 'runserver' in x:
         print('Login to Database First')
     else:
         main()

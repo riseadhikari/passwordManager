@@ -3,3 +3,6 @@ env/
 config
 config.json
 log.json
+launch.py
+launch.bat
+db.bat
